@@ -45,14 +45,22 @@ class EchoBot(sleekxmpp.ClientXMPP):
         # session start method
         self.send_presence()
         self.get_roster()
-        while 0==0:
-            self.nachricht_senden()
+        self.nachricht_senden()
         
 
         
 
     def message(self, msg):
-        print(msg['body'])
+        a = str(msg['from'])
+        try:
+            b = a.split("/")
+            del b[-1]
+            c = b[0]
+        except:
+            c = str(msg['from'])
+        
+        print(c + ": " +msg['body'])
+        self.nachricht_senden()
             
             
 if __name__ == '__main__':
