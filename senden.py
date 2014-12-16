@@ -60,7 +60,6 @@ class EchoBot(sleekxmpp.ClientXMPP):
             c = str(msg['from'])
         
         print(c + ": " +msg['body'])
-        self.nachricht_senden()
             
             
 if __name__ == '__main__':
