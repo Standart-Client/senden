@@ -94,7 +94,7 @@ if __name__ == '__main__':
     xmpp.auto_subscribe = True
 
     # Connect to the XMPP server and start processing XMPP stanzas.
-    if xmpp.connect(('odin', 5222), use_tls=False):
+    if xmpp.connect(('odin', 5222), use_tls=False): #Kein SSL Zertifikat Error
         xmpp.process(threaded=False) #block=True
         print("Done")
     else:
