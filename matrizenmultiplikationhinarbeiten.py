@@ -28,7 +28,8 @@ class EchoBot(sleekxmpp.ClientXMPP):
         # message handler
         self.add_event_handler("message", self.message)
         self.add_event_handler("nachricht_senden", self.nachricht_senden)
-
+        self.add_event_handler("multzs", self.multzs)
+        
     def nachricht_senden(self):
         name = input("Name an: ")
         nachricht = input("Nachricht: ")
@@ -39,7 +40,18 @@ class EchoBot(sleekxmpp.ClientXMPP):
         self.send_presence()
         self.get_roster()
         print("startet")
-        
+
+    def multzs(self, z, s):
+       zm=len(z) 
+       sn=len(s) 
+       if zm != sn: 
+          print('Spalten der Matrix (',zm,') ungleich Zeilen des Vektors (',sn,')') 
+       else: 
+          ergebnis=0 
+          for j in range(zm): 
+             ergebnis += z[j]*s[j] 
+          send = "result;" + str(z)+","+str(s)+","+str(ergebnis) 
+          return send    
 
         
 
@@ -53,13 +65,24 @@ class EchoBot(sleekxmpp.ClientXMPP):
             c = str(msg['from'])
         
         print(c + ": " +msg['body'])
-        
+        m = msg['body']
         name = c
         #Hier wird dann berechnet
-
+        m.split(";") 
+        xz = m.split(":")[0] 
+        xs = m.split(":")[1] 
+        nz = xz.split(";")[0] 
+        ns = xs.split(";")[0] 
+        z = [float(i) for i in xz.split(";")[1].split(",")] 
+        s = [float(i) for i in xs.split(";")[1].split(",")]
         #Die Antwort kommt dann in die Variable nachricht
-        nachricht = "1, 2, 3"
+        nachricht = self.multzs(z, s)
         self.send_message(name, nachricht)
+
+
+
+
+
             
 if __name__ == '__main__':
     # Setup the command line arguments.
