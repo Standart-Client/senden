@@ -2,12 +2,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-    this file is a slightly modified echobot from
-    sleekXMPP (C) 2010  Nathanael C. Fritz
-    needs sleekxmpp
-"""
-
 import sys
 import logging
 import getpass
